@@ -1,0 +1,46 @@
+# Flutter specific
+.flutter-plugins-dependencies
+.metadata
+.dart_tool/
+build/
+.DS_Store
+.idea/
+.vscode/
+*.iml
+*.log
+
+# Android specific
+android/.gradle/
+android/.kotlin/
+android/local.properties
+android/build/
+android/app/build/
+
+# iOS specific
+ios/Flutter/ephemeral/
+ios/.symlinks/
+ios/Runner.xcodeproj/project.xcworkspace/
+ios/Runner.xcworkspace/
+
+# macOS specific
+macos/Flutter/ephemeral/
+macos/.symlinks/
+macos/Runner.xcodeproj/project.xcworkspace/
+macos/Runner.xcworkspace/
+
+# Windows specific
+windows/flutter/ephemeral/
+
+# Linux specific
+linux/flutter/ephemeral/
+
+# Node.js (for the 'api' directory)
+api/node_modules/
+api/package-lock.json
+
+# Dependency locks (optional, but common to ignore if you prefer fresh installs)
+pubspec.lock
+
+# Generated files
+*.g.dart
+*.freezed.dart
