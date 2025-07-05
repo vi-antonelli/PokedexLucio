@@ -32,28 +32,57 @@ class _TelaLoginState extends State<TelaLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Login")),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _emailController,
-                decoration: const InputDecoration(labelText: "Email"),
-                validator: (value) => value!.contains('@') ? null : "Email inválido",
-              ),
-              TextFormField(
-                controller: _passController,
-                decoration: const InputDecoration(labelText: "Senha"),
-                obscureText: true,
-                validator: (value) => value!.isEmpty ? "Senha obrigatória" : null,
-              ),
-              const SizedBox(height: 20),
-              ElevatedButton(onPressed: _login, child: const Text("Entrar")),
-            ],
+      body: Stack(
+        children: [
+          // Background Image
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/pokeball_background.png', // You'll need to add a pokeball_background.png to your assets/images folder
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24.0),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      'assets/images/pokemon_logo.png', // You'll need to add a pokemon_logo.png to your assets/images folder
+                      height: 150,
+                    ),
+                    const SizedBox(height: 40),
+                    TextFormField(
+                      controller: _emailController,
+                      decoration: const InputDecoration(
+                        labelText: "Email",
+                        prefixIcon: Icon(Icons.person, color: Colors.black54),
+                      ),
+                      validator: (value) => value!.contains('@') ? null : "Email inválido",
+                    ),
+                    const SizedBox(height: 20),
+                    TextFormField(
+                      controller: _passController,
+                      decoration: const InputDecoration(
+                        labelText: "Senha",
+                        prefixIcon: Icon(Icons.lock, color: Colors.black54),
+                      ),
+                      obscureText: true,
+                      validator: (value) => value!.isEmpty ? "Senha obrigatória" : null,
+                    ),
+                    const SizedBox(height: 30),
+                    ElevatedButton(
+                      onPressed: _login,
+                      child: const Text("Entrar"),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

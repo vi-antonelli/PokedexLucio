@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'database_helper.dart';
 import 'models/pokemon.dart';
+import 'tela_login.dart';
 
 class TelaHome extends StatefulWidget {
   const TelaHome({super.key});
@@ -22,7 +23,16 @@ class TelaHomeState extends State<TelaHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Pokémons")),
+            appBar: AppBar(title: const Text("Pokédex"),
+      actions: [
+        IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const TelaLogin()));
+          },
+        ),
+      ],
+      ),
       body: FutureBuilder<List<Pokemon>>(
         future: _pokemons,
         builder: (context, snapshot) {
@@ -35,13 +45,48 @@ class TelaHomeState extends State<TelaHome> {
           } else {
             final pokemons = snapshot.data!;
             return ListView.builder(
+              padding: const EdgeInsets.all(8.0),
               itemCount: pokemons.length,
               itemBuilder: (context, index) {
                 final p = pokemons[index];
-                return ListTile(
-                                    leading: Image.asset(p.imagem, width: 50),
-                  title: Text(p.nome),
-                  subtitle: Text(p.tipo),
+                return Card(
+                  margin: const EdgeInsets.symmetric(vertical: 8.0),
+                  elevation: 4,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        Image.asset(p.imagem, width: 80, height: 80, fit: BoxFit.cover),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                p.nome,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                p.tipo,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey[700],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               },
             );
